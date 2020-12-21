@@ -17,19 +17,21 @@ class CreateCouriersTable extends Migration
             $table->bigIncrements('id');
             $table->text('name');
             $table->text('surname');
-            $table->integer('transport_id');
-            $table->integer('bakery_id');
+            $table->unsignedBigInteger('transport_id');
+            $table->unsignedBigInteger('bakery_id');
             $table->timestamps();
         });
 
-//        Schema::table('couriers', function (Blueprint $table) {
-//            $table->foreign('transport_id')
-//                ->references('id')
-//                ->on('couriers_transport');
-//            $table->foreign('bakery_id')
-//                ->references('id')
-//                ->on('bakeries');
-//        });
+        Schema::table('couriers', function (Blueprint $table) {
+            $table->foreign('transport_id')
+                ->references('id')
+                ->on('couriers_transport')
+                ->onDelete('cascade');
+            $table->foreign('bakery_id')
+                ->references('id')
+                ->on('bakeries')
+                ->onDelete('cascade');
+        });
     }
 
     /**

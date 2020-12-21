@@ -18,12 +18,13 @@ class CreateBakersTable extends Migration
             $table->text('name');
             $table->text('surname');
             $table->text('position');
-            $table->integer('bakery_id')->unsigned();
+            $table->unsignedBigInteger('bakery_id');
             $table->timestamps();
 
-//            $table->foreign('bakery_id')
-//                ->references('id')
-//                ->on('bakeries');
+            $table->foreign('bakery_id')
+                ->references('id')
+                ->on('bakeries')
+                ->onDelete('cascade');
         });
     }
 

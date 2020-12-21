@@ -17,12 +17,13 @@ class CreateDirectorsTable extends Migration
             $table->bigIncrements('id');
             $table->text('name');
             $table->text('surname');
-            $table->integer('bakery_id');
+            $table->unsignedBigInteger('bakery_id');
             $table->timestamps();
 
-//            $table->foreign('bakery_id')
-//                ->references('id')
-//                ->on('bakeries');
+            $table->foreign('bakery_id')
+                ->references('id')
+                ->on('bakeries')
+                ->onDelete('cascade');
         });
     }
 

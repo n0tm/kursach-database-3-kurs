@@ -15,28 +15,33 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('client_id')->unsigned();
-            $table->integer('baker_id')->unsigned();
-            $table->integer('bun_id')->unsigned();
-            $table->integer('bakery_id')->unsigned();
-            $table->integer('courier_id')->unsigned();
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('baker_id');
+            $table->unsignedBigInteger('bun_id');
+            $table->unsignedBigInteger('bakery_id');
+            $table->unsignedBigInteger('courier_id');
             $table->timestamps();
 
-//            $table->foreign('client_id')
-//                ->references('id')
-//                ->on('clients');
-//            $table->foreign('baker_id')
-//                ->references('id')
-//                ->on('bakers');
-//            $table->foreign('bakery_id')
-//                ->references('id')
-//                ->on('bakeries');
-//            $table->foreign('courier_id')
-//                ->references('id')
-//                ->on('couriers');
-//            $table->foreign('bun_id')
-//                ->references('id')
-//                ->on('buns');
+            $table->foreign('client_id')
+                ->references('id')
+                ->on('clients')
+                ->onDelete('cascade');
+            $table->foreign('baker_id')
+                ->references('id')
+                ->on('bakers')
+                ->onDelete('cascade');
+            $table->foreign('bakery_id')
+                ->references('id')
+                ->on('bakeries')
+                ->onDelete('cascade');
+            $table->foreign('courier_id')
+                ->references('id')
+                ->on('couriers')
+                ->onDelete('cascade');
+            $table->foreign('bun_id')
+                ->references('id')
+                ->on('buns')
+                ->onDelete('cascade');
         });
     }
 

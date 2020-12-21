@@ -18,12 +18,13 @@ class CreateClientsTable extends Migration
             $table->text('name');
             $table->text('surname');
             $table->text('phone');
-            $table->integer('discount_card_id')->unsigned();
+            $table->unsignedBigInteger('discount_card_id');
             $table->timestamps();
 
-//            $table->foreign('discount_card_id')
-//                ->references('id')
-//                ->on('discount_cards');
+            $table->foreign('discount_card_id')
+                ->references('id')
+                ->on('discount_cards')
+                ->onDelete('cascade');
         });
     }
 
